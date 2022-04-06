@@ -22,7 +22,7 @@ when SMALL_IMG_SIDE <= 1:
 
 
 proc getSmallImg(img: Image): Image =
-    ## Return an image resized to sqrt(HASH_SIZE)
+    ## Return an image resized to sqrt(HASH_SIZE * 8)
     result = img.resize(SMALL_IMG_SIDE, SMALL_IMG_SIDE)
 
 
