@@ -11,8 +11,8 @@ import pixie
 const HASH_SIZE: int = 32
 
 type
-    PixelArray = array[HASH_SIZE * 8, uint8]
-    HashArray = array[HASH_SIZE, uint8]
+    PixelArray* = array[HASH_SIZE * 8, uint8]
+    HashArray* = array[HASH_SIZE, uint8]
 
 
 const SMALL_IMG_SIDE = sqrt((HASH_SIZE * 8).float64).int
