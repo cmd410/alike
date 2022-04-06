@@ -6,8 +6,7 @@ import std/sequtils
 
 import pixie
 
-# Change this to your preference, must be an power of 2 integer
-# e.g. 64, 128, 256, 512, 1024, ... 
+# Change this to your preference
 # Greater values cause to match smaller image details
 const HASH_SIZE: int = 32
 
