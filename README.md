@@ -15,7 +15,7 @@ Useful when searching for duplicate or similar pictures.
 
 1. Get source code by cloning this repository or downloading as zip
 1. Open directory where the source code is in terminal and run `nimble build` (yeah, you'll need to have nimble installed first)
-1. After succeful build the binaries will be in `./bin` folder, you can run them
+1. After successful build the binaries will be in `./bin` folder, you can run them
 
 ## Usage
 
