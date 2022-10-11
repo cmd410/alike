@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.2.0"
 author        = "Crystal Melting Dot"
 description   = "A nim implementation of pHash algorithm for computing perceptual hash of an image"
 license       = "MIT"
