@@ -9,20 +9,15 @@ import alikepkg/lib
 export lib
 
 when isMainModule:
-  const algHelp = """
-      Algorithm to use for hash computation, options are:
-          simple - use only brightness of pixel
-          rgba - compute hash for RGBA channels separatelyshould be more precise, but slightly less performant than simple)
-      """.dedent()
-
   var p = newParser:
     option("-a", "--algorithm",
-             help = algHelp,
+             help = "Algorithm to use for hash computation",
              default = some("rgba"),
              choices = @["simple", "rgba"],
     )
 
     command("compare2"):
+      help("Compare 2 image files")
       arg("file1")
       arg("file2")
 
@@ -63,6 +58,7 @@ when isMainModule:
           echo "entirely different image"
 
     command("hash"):
+      help("Compute hash for image file")
       arg("file")
       run:
         let algo = opts.parentOpts.algorithm
