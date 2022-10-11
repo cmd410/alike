@@ -1,5 +1,6 @@
 import pixie
-import argparse
+when isMainModule:
+  import argparse
 
 import alikepkg/lib
 
