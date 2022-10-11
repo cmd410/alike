@@ -8,7 +8,7 @@ import pixie
 
 # Change this to your preference
 # Greater values cause to match smaller image details
-const HASH_SIZE: int = 32
+const HASH_SIZE: int = 64
 
 type
   PixelArray* = array[HASH_SIZE * 8, uint8]
@@ -136,3 +136,30 @@ proc `$`*(v: RGBAHash): string =
     "\ng: " & v.g.hexDigest &
     "\nb: " & v.b.hexDigest &
     "\na: " & v.a.hexDigest
+
+proc toImage*(ha: HashArray): Image =
+  result = newImage(SMALL_IMG_SIDE, SMALL_IMG_SIDE)
+
+  for i, val in ha:
+    for shift in countdown(7, 0, 1):
+      let pixidx = min((i * 8) + (7 - shift), result.data.high)
+      if (val and (1'u8 shl (7 - shift))) > 0:
+        result.data[pixidx] = ColorRGBX(r: 255'u8, g: 255'u8, b: 255'u8, a: 255'u8)
+      else:
+        result.data[pixidx] = ColorRGBX(r: 0'u8, g: 0'u8, b: 0'u8, a: 255'u8)
+
+proc toImage*(imgHash: RGBAHash): Image =
+  result = newImage(SMALL_IMG_SIDE, SMALL_IMG_SIDE)
+
+  let
+    red = imgHash.r.toImage
+    green = imgHash.g.toImage
+    blue = imgHash.b.toImage
+    alpha = imgHash.a.toImage
+  
+  for i in 0..result.data.high:
+    let idx = min(i, result.data.high)
+    result.data[idx].r = red.data[idx].r
+    result.data[idx].g = green.data[idx].r
+    result.data[idx].b = blue.data[idx].r
+    result.data[idx].a = alpha.data[idx].r
