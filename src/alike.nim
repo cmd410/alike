@@ -1,5 +1,5 @@
-import pixie
 when isMainModule:
+  import pixie
   import argparse
 
 import alikepkg/lib
