@@ -41,7 +41,6 @@ iterator iterPixelColors(img: Image): ColorRGBA =
   for col in img.data:
     yield col
 
-
 proc getSimpleImgHash*(img: Image): HashArray =
   ## Compute simple perceptual hash for image
 

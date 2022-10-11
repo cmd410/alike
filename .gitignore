@@ -1,4 +1,5 @@
 bin
+htmldocs/
 *.exe
 tests/test_RGBA
 tests/test_simple

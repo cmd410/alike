@@ -5,11 +5,18 @@ Useful when searching for duplicate or similar pictures.
 
 ## How it works
 
-1. Make a small square copy of image to remove high frequency detail
-1. make it grayscale
-1. compute average pixel brightness
-1. compare each pixel against average pixel brightness, and write a bitmask where 1 is bighter 0 - darker.
-1. comparing images is just counting differing bits in their hash
+![](demo/testimg1.png)
+
+Simple algorithm:
+1. Get a small grayscale square image from original by scaling it
+1. Compute average image brightness
+1. Compare each pixel against average image brightness
+1. Write the result into bit array where 1 is 'brighter' and 0 is 'darker'
+1. Voila! We got the hash.
+
+RGBA is basically simple algoritm x 4 for each channel.
+
+Computing the difference is basically counting different bits in two hashes.
 
 ## Installation
 
@@ -19,4 +26,23 @@ Useful when searching for duplicate or similar pictures.
 
 ## Usage
 
-For now cli only features 1 command - `compare2` which takes 2 arguments, which are paths to images you want to compare
+CLI:
+
+```
+alike
+
+Usage:
+   [options] COMMAND
+
+Commands:
+
+  compare2         Compare 2 image files
+  hash             Compute hash for image file
+
+Options:
+  -h, --help
+  -a, --algorithm=ALGORITHM  Algorithm to use for hash computation Possible values: [simple, rgba] (default: rgba)
+```
+
+Embeding:
+

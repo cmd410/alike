@@ -1,3 +1,18 @@
+## alike
+## 
+## Usage:
+##    [options] COMMAND
+## 
+## Commands:
+## 
+##   compare2         Compare 2 image files
+##   hash             Compute hash for image file
+## 
+## Options:
+##   -h, --help
+##   -a, --algorithm=ALGORITHM  Algorithm to use for hash computation Possible values: [simple, rgba] (default: rgba)
+##
+
 when isMainModule:
   import strutils
 

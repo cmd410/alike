@@ -1,0 +1,2 @@
+#!/bin/sh
+nim doc --project --index:on --git.url:https://github.com/cmd410/alike --git.commit:master --outdir:htmldocs src/alike.nim
