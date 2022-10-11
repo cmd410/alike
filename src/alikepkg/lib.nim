@@ -132,3 +132,9 @@ proc diff*(hash1, hash2: RGBAHash): float64 =
         hash1.b.diff(hash2.b) +
         hash1.a.diff(hash2.a)
     ) / 4
+
+proc `$`*(v: RGBAHash): string =
+    result = "r: " & v.r.hexDigest &
+        "\ng: " & v.g.hexDigest &
+        "\nb: " & v.b.hexDigest &
+        "\na: " & v.a.hexDigest
