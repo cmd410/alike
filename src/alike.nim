@@ -25,32 +25,32 @@ when isMainModule:
     command("compare2"):
       arg("file1")
       arg("file2")
-      
+
       run:
         let
           algo = opts.parentOpts.algorithm
           filepath1 = opts.file1
           filepath2 = opts.file2
-        
+
         var difference = 1.0
         case algo
         of "simple":
           let
             hash1 = readImage(filepath1).getSimpleImgHash
             hash2 = readImage(filepath2).getSimpleImgHash
-          
+
           difference = hash1.diff(hash2)
-          
+
           echo "file1: ", hash1.hexDigest
           echo "file2: ", hash2.hexDigest
         of "rgba":
           let
             hash1 = readImage(filepath1).getRGBAImgHash
             hash2 = readImage(filepath2).getRGBAImgHash
-          
+
           difference = hash1.diff(hash2)
         else: discard
-        
+
         echo "----"
         echo "Image difference = ", difference
         if difference == 0.0:
