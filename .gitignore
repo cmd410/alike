@@ -1,3 +1,4 @@
 bin
 *.exe
 tests/test_RGBA
+tests/test_simple
