@@ -26,7 +26,7 @@ Computing the difference is basically counting different bits in two hashes.
 
 ## Usage
 
-CLI:
+### CLI
 
 ```
 alike
@@ -44,5 +44,19 @@ Options:
   -a, --algorithm=ALGORITHM  Algorithm to use for hash computation Possible values: [simple, rgba] (default: rgba)
 ```
 
-Embeding:
+### Embeding
 
+Alike can be used as a library. [See full API reference](https://alike.el-psy-cong.ru/). 
+
+Example usage:
+
+```nim
+import pixie
+import alike
+
+let
+  img1 = readImage("img1.png")
+  img2 = readImage("img2.png")
+
+echo img1.getRGBAImgHash.diff(img2.getRGBAImgHash)
+```
