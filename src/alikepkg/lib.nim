@@ -11,11 +11,13 @@ import pixie
 const HASH_SIZE: int = 64
 
 type
-  PixelArray* = array[HASH_SIZE * 8, uint8]
+  PixelArray = array[HASH_SIZE * 8, uint8]
   HashArray* = array[HASH_SIZE, uint8]
+    ## Simple hash bit array
 
-  RGBAArray* = array[HASH_SIZE * 8, ColorRGBA]
+  RGBAArray = array[HASH_SIZE * 8, ColorRGBA]
   RGBAHash* = tuple[r, g, b, a: HashArray]
+    ## RGBA hash consists of 4 simple hash bit arrays for each channel
 
 
 const SMALL_IMG_SIDE = sqrt((HASH_SIZE * 8).float64).int
@@ -27,7 +29,6 @@ when SMALL_IMG_SIDE <= 1:
 proc getSmallImg(img: Image): Image =
   ## Return an image resized to sqrt(HASH_SIZE * 8)
   result = img.resize(SMALL_IMG_SIDE, SMALL_IMG_SIDE)
-
 
 iterator iterPixelValues(img: Image): uint8 =
   ## Iterate over average of rgb channels pixel values
@@ -63,7 +64,7 @@ proc getSimpleImgHash*(img: Image): HashArray =
       result[idx] = result[idx] or (1'u8 shl shift)
 
 proc getRGBAImgHash*(img: Image): RGBAHash =
-  ## Compute RGBAHash perceptual of an image
+  ## Compute RGBAHash of an image
 
   let smallImg = img.getSmallImg
 
@@ -109,6 +110,8 @@ proc hexDigest*(hash: HashArray): string =
 
 proc diff*(hash1, hash2: HashArray): float64 =
   ## Compute diff for an image
+  ##
+  ## Result is a float value in range 0-1, larger values mean more difference
   let totalBits = HASH_SIZE * 8
   var diffBits = 0
   for (v1, v2) in zip(hash1, hash2):
@@ -122,6 +125,8 @@ proc diff*(hash1, hash2: HashArray): float64 =
 
 proc diff*(hash1, hash2: RGBAHash): float64 =
   ## Compute diff for an image using RGBAHash
+  ## 
+  ## Result is a float value in range 0-1, larger values mean more difference
 
   return (
     hash1.r.diff(hash2.r) +
@@ -137,6 +142,7 @@ proc `$`*(v: RGBAHash): string =
     "\na: " & v.a.hexDigest
 
 proc toImage*(ha: HashArray): Image =
+  ## Return an image representation of Simple hash
   result = newImage(SMALL_IMG_SIDE, SMALL_IMG_SIDE)
 
   for i, val in ha:
@@ -148,6 +154,7 @@ proc toImage*(ha: HashArray): Image =
         result.data[pixidx] = ColorRGBX(r: 0'u8, g: 0'u8, b: 0'u8, a: 255'u8)
 
 proc toImage*(imgHash: RGBAHash): Image =
+  ## Return an image representation of RGBA hash
   result = newImage(SMALL_IMG_SIDE, SMALL_IMG_SIDE)
 
   let

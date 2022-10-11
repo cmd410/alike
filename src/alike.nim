@@ -1,12 +1,16 @@
-## alike
+## Alike is a utility for computing perceptiual hash of images and comparing them.
 ## 
 ## Usage:
 ##    [options] COMMAND
 ## 
 ## Commands:
-## 
-##   compare2         Compare 2 image files
-##   hash             Compute hash for image file
+##   
+## ========  ===========================
+## command   description
+## ========  ===========================
+## compare2  Compare 2 image files      
+## hash      Compute hash for image file
+## ========  ===========================
 ## 
 ## Options:
 ##   -h, --help
@@ -25,6 +29,8 @@ export lib
 
 when isMainModule:
   var p = newParser:
+    help("Alike is a utility for computing perceptiual hash of images and comparing them.")
+
     option("-a", "--algorithm",
              help = "Algorithm to use for hash computation",
              default = some("rgba"),
