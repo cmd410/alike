@@ -8,7 +8,7 @@ import pixie
 
 # Change this to your preference
 # Greater values cause to match smaller image details
-const HASH_SIZE: int = 64
+const HASH_SIZE {.intdefine.}: int = 64
 
 type
   PixelArray = array[HASH_SIZE * 8, uint8]
